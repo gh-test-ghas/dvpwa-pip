@@ -1,7 +1,7 @@
 # Dependency Review Action
 #
 # This Action will scan dependency manifest files, and upload the information to the dependency graph.
-# Furthermore it will scan changes in manifest files on a PR and add information on those changes to the PR.
+# Furthermore, it will scan changes in manifest files on a PR and add information on those changes to the PR.
 #
 name: 'Dependency management'
 on:
@@ -20,6 +20,14 @@ jobs:
     steps:
       - name: 'Checkout repository'
         uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' # Use a specific version, e.g., '3.9', '3.10', '3.11', '3.12'
+      - name: 'Install pip-tools'
+        run: pip install pip-tools
+      - name: 'Generate requirements.txt from requirements.in'
+        run: pip-compile requirements.in
       - name: 'Component Detection dependency submission action'
         uses: advanced-security/component-detection-dependency-submission-action@v0.0.6
       - name: 'Dependency Review'
