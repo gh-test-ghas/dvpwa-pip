@@ -1,0 +1,37 @@
+# To enable Dependabot updates, create a .github/dependabot.yml file in your repository.
+# For more information, see https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Python dependencies (pip)
+  - package-ecosystem: "pip" # Identifies the package manager for Python
+    directory: "/" # Location of your requirements.in file (root of the repo)
+    schedule:
+      interval: "daily" # How often to check for updates (daily, weekly, monthly)
+    # Target branch for pull requests (optional, defaults to default branch)
+    # target-branch: "main"
+    # Optional: Group related updates into a single PR
+    groups:
+      production-dependencies:
+        patterns:
+          - "*" # Match all dependencies for grouping
+        update-types:
+          - "patch"
+          - "minor"
+    # Optional: Assign labels to the PRs
+    labels:
+      - "dependencies"
+      - "dependabot"
+    # Optional: Set a limit for the number of open Dependabot PRs
+    open-pull-requests-limit: 5
+    # Optional: Set reviewers for the PRs
+    # reviewers:
+    #   - your-github-username
+    # Optional: Set assignees for the PRs
+    # assignees:
+    #   - your-github-username
+    # Optional: Customize commit messages
+    # commit-message:
+    #   prefix: "chore"
+    #   prefix-development: "dev"
+    #   include: "scope"
